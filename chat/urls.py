@@ -17,9 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
+
+# from rest_framework import routers
+from rest_framework_nested import routers
 
 from chat.api import views
+# from . import admin
 
 router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
@@ -30,10 +33,18 @@ router.register(r"messages", views.MessageViewSet)
 router.register(r"tags", views.TagViewSet)
 router.register(r"notes", views.NoteViewSet)
 
+conversations_router = routers.NestedSimpleRouter(
+    router, r"conversations", lookup="conversation"
+)
+conversations_router.register(
+    r"messages", views.MessageViewSet, basename="conversation-messages"
+)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
+    path("api/", include(conversations_router.urls)),
     path("api/auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("api/dj-rest-auth/", include("dj_rest_auth.urls")),
     path("api/dj-rest-auth/registration/", include("dj_rest_auth.registration.urls")),

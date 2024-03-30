@@ -103,6 +103,14 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = serde.MessageSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        logger.info("kwargs", kwargss=self.kwargs)
+        if conversation_id := self.kwargs.get("conversation_pk"):
+            return self.queryset.filter(
+                conversation_id=conversation_id, conversation__owner=self.request.user
+            )
+        return self.queryset.filter(conversation__owner=self.request.user)
+
 
 class TagViewSet(viewsets.ModelViewSet):
     """

@@ -29,6 +29,9 @@ django-structlog = "^8.0.0"
 djangorestframework-camel-case = "^1.4.2"
 drf-orjson-renderer = "^1.7.2"
 rich = "^13.7.1"
+drf-nested-routers = "^0.93.5"
+uvicorn = "^0.29.0"
+gunicorn = "^21.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -44,3 +47,6 @@ build-backend = "poetry.core.masonry.api"
 dev = "python manage.py runserver"
 makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
+flightcheck = "python manage.py check --deploy"
+run = "python -m gunicorn chat.asgi:application -k uvicorn.workers.UvicornWorker"
+

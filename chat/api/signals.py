@@ -9,5 +9,5 @@ from .models import User, SystemPrompt
 def create_system_prompt_for_new_user(sender, instance, created, **kwargs):
     if created:
         SystemPrompt.objects.create(
-            name="Default", content=DEFAULT_SYSTEM_PROMPT, user=instance
+            name="Default", content=DEFAULT_SYSTEM_PROMPT, owner=instance
         )

@@ -108,6 +108,7 @@ AUTHENTICATION_BACKENDS = [
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 LOGIN_URL = "http://localhost:8000/api/dj-rest-auth/login"
 
@@ -181,6 +182,14 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "JSON_UNDERSCOREIZE": {
+        "ignore_keys": ("password1", "password2", "new_password1", "new_password2"),
+    },
 }
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -219,13 +228,6 @@ LOGGING = {
         },
     },
     "handlers": {
-        # 1. Make sure you use handlers adapted for your project.
-        # These handlers configurations are only examples for this library.
-        # See python's logging.handlers: https://docs.python.org/3/library/logging.handlers.html
-        #
-        # 2. You might also want to use different logging configurations depending of the environment.
-        # Different files (local.py, tests.py, production.py, ci.py, etc.) or only conditions.
-        # See https://docs.djangoproject.com/en/dev/topics/settings/#designating-the-settings
         "console": {
             "class": "logging.StreamHandler",
             "formatter": "plain_console" if env.bool("DEBUG") else "json_formatter",
