@@ -1,0 +1,16 @@
+{
+  "name": "django-chatbot-playground",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@pulumi/aws": "^6.28.2",
+    "@pulumi/awsx": "^2.6.0",
+    "cdk": "^2.134.0",
+    "eslint": "^8.57.0"
+  }
+}

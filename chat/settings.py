@@ -105,8 +105,11 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
@@ -187,6 +190,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
     "DEFAULT_RENDERER_CLASSES": (
+        # "djangorestframework_camel_case.render.CamelCaseJSONRenderer",
         "djangorestframework_camel_case.render.CamelCaseJSONRenderer",
         "djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer",
     ),
@@ -208,6 +212,12 @@ REST_FRAMEWORK = {
     },
 }
 
+## This clashes with dj_rest_auth password1 and password2 fields...
+## might be worth replicating the bug and submitting a PR to fix it at some point.
+# JSON_CAMEL_CASE = {
+#     "RENDERER_CLASS": "drf_orjson_renderer.renderers.ORJSONRenderer",
+# }
+
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         # For each OAuth based provider, either add a ``SocialApp``
@@ -228,7 +238,6 @@ SOCIALACCOUNT_PROVIDERS = {
     },
 }
 
-JSON_CAMEL_CASE = {"RENDERER_CLASS": "drf_orjson_renderer.renderers.ORJSONRenderer"}
 
 LOGGING = {
     "version": 1,

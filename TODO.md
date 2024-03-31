@@ -18,17 +18,17 @@ Some of the learning questions I want to answer:
     - [X] user
     - [ ] groups -> same as user
 - [X] How to add created_at and updated_at to all models?
-- [ ] How to run django ORM from a lambda?
-- [ ] How to manage background jobs via AWS Lambda and SQS?
-- [ ] How to have social auth?
+- [X] How to run django ORM from a lambda?
+- [X] How to manage background jobs via AWS Lambda and SQS?
+- [X] How to have social auth?
 - [X] How to have more granular or advanced type of permissions?
-- [ ] Write a production docker for Django?
+- [X] Write a production docker for Django?
 - [ ] How to integrate the API with a frontend?
 - [X] How to add logging?
   - [ ] BONUS POINT: OTel integration
 - [ ] How to use Django or DRF filters?
 - [X] How to leverage nested routes?
-- [ ] How to add caching using Momento?
+- [/] How to add caching using Momento?
 - [X] How to use environment variables?
 - [X] How to restrict actions to the owner of an object?
 - [X] How to ensure the user id is carried properly when requests are sent?
