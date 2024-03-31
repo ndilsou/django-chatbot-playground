@@ -1,23 +1,21 @@
-FROM python:3.12 as poetry
+FROM public.ecr.aws/lambda/python:3.12 as builder
 
 RUN pip install poetry
-WORKDIR /app
+WORKDIR /build
 COPY pyproject.toml poetry.lock ./
-RUN poetry export -f requirements.txt --output requirements.txt
+RUN poetry export -f requirements.txt --output requirements.txt \
+    && pip install --no-cache-dir -r requirements.txt -t ${LAMBDA_TASK_ROOT}
 
-# Use an AWS base image
-FROM public.ecr.aws/lambda/python:3.12
 # ADD --chmod=755 https://astral.sh/uv/install.sh /install.sh
 # RUN /install.sh && rm /install.sh
 
-# Copy your Django project
-COPY . /var/task/
+FROM public.ecr.aws/lambda/python:3.12
 
-# Install dependencies
-COPY --from=poetry /app/requirements.txt .
+ENV DEBUG=False
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# RUN /root/.cargo/bin/uv pip install --system --no-cache -r requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --from=builder ${LAMBDA_TASK_ROOT} ${LAMBDA_TASK_ROOT}
+COPY . ${LAMBDA_TASK_ROOT}
 
-# Set the command to run your script
 CMD ["chat.awslambda.handler"]
