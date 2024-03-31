@@ -1,0 +1,4 @@
+.venv
+.sst
+.git
+.node_modules
