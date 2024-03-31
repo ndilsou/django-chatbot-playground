@@ -9,7 +9,7 @@ def create_id() -> str:
 
 
 class Cuid2Field(models.CharField):
-    description = "A Cuid2 string"
+    description = "A cuid2 string"
 
     def __init__(self, *args, **kwargs):
         kwargs["max_length"] = 24

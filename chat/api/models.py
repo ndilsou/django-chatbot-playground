@@ -1,8 +1,8 @@
 from django.db import models
 import structlog
 from chat import settings
-from chat import commons
-from chat.commons import Cuid2Field
+from chat.commons import cuid
+from chat.commons.cuid import Cuid2Field
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
@@ -24,7 +24,7 @@ class User(AbstractUser):
         ordering = ["email"]
 
 
-class SystemPrompt(commons.BaseModel):
+class SystemPrompt(cuid.BaseModel):
     name = models.CharField(max_length=400, default="Untitled")
     content = models.TextField()
     owner = models.ForeignKey(
@@ -33,7 +33,7 @@ class SystemPrompt(commons.BaseModel):
     )
 
 
-class Conversation(commons.BaseModel):
+class Conversation(cuid.BaseModel):
     title = models.CharField(max_length=400, default="Untitled")
     system_prompt = models.ForeignKey(
         SystemPrompt,
@@ -88,7 +88,7 @@ class Conversation(commons.BaseModel):
         return reply_message
 
 
-class Message(commons.BaseModel):
+class Message(cuid.BaseModel):
     class RoleType(models.TextChoices):
         USER = "user"
         SYSTEM = "system"
@@ -105,7 +105,7 @@ class Message(commons.BaseModel):
     )
 
 
-class Tag(commons.BaseModel):
+class Tag(cuid.BaseModel):
     class Meta:
         indexes = [
             models.Index(fields=["label"]),
@@ -118,7 +118,7 @@ class Tag(commons.BaseModel):
     )
 
 
-class Note(commons.BaseModel):
+class Note(cuid.BaseModel):
     class Meta:
         indexes = [
             models.Index(fields=["title"]),

@@ -33,6 +33,7 @@ drf-nested-routers = "^0.93.5"
 uvicorn = "^0.29.0"
 gunicorn = "^21.2.0"
 aws-lambda-powertools = "^2.36.0"
+momento = "^1.20.1"
 
 
 [tool.poetry.group.dev.dependencies]
