@@ -39,7 +39,6 @@ Some of the learning questions I want to answer:
 
 ## Bugs
 
-- [ ] DJ-REST-AUTH registration clashes with camelCase JSON formatter on the fields password1 and password2. See: [StackOverflow discussion](https://stackoverflow.com/questions/63768825/get-this-field-is-required-in-django-auth-registration)
+- [X] DJ-REST-AUTH registration clashes with camelCase JSON formatter on the fields password1 and password2. See: [StackOverflow discussion](https://stackoverflow.com/questions/63768825/get-this-field-is-required-in-django-auth-registration)
     Changing settings doesnt work
-
-
+    Bug was caused by issue with ORJSON. Disabling orjson fixes it. Might need PR to owners to resolve.
