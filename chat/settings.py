@@ -123,6 +123,18 @@ DATABASES = {
     }
 }
 
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'chat.commons.cache.MomentoCache',
+#         'API_KEY': env.str("MOMENTO_API_KEY"),
+#         'CACHE_NAME': env.str("MOMENTO_CACHE_NAME"),
+#         'DEFAULT_TTL': 600,  # Time in seconds
+#     }
+# }
+
+# Email
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -140,6 +152,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
 ]
 
 
@@ -244,10 +260,6 @@ LOGGING = {
         },
     },
 }
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-]
-
 
 structlog.configure(
     processors=[

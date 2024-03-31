@@ -11,8 +11,6 @@ from chat.api.models import Message  # noqa: E402
 
 
 def handler(event, context):
-    # Your background task logic here
-    # For example, querying your models
     result = Message.objects.all()
     messages = []
     for message in result:

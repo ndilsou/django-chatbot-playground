@@ -8,7 +8,15 @@ from . import models
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ["url", "id", "username", "email", "groups"]
+        fields = [
+            "url",
+            "id",
+            "created_at",
+            "updated_at",
+            "username",
+            "email",
+            "groups",
+        ]
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -22,7 +30,7 @@ class SystemPromptSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.SystemPrompt
-        fields = ["url", "id", "name", "content", "owner"]
+        fields = ["url", "id", "created_at", "updated_at", "name", "content", "owner"]
 
 
 class ConversationSerializer(serializers.ModelSerializer):
@@ -31,7 +39,15 @@ class ConversationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Conversation
-        fields = ["url", "id", "title", "system_prompt", "owner"]
+        fields = [
+            "url",
+            "id",
+            "created_at",
+            "updated_at",
+            "title",
+            "system_prompt",
+            "owner",
+        ]
 
 
 class ContinueConversationSerializer(serializers.ModelSerializer):
@@ -45,7 +61,16 @@ class MessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Message
-        fields = ["url", "id", "role", "content", "name", "conversation"]
+        fields = [
+            "url",
+            "id",
+            "created_at",
+            "updated_at",
+            "role",
+            "content",
+            "name",
+            "conversation",
+        ]
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -59,4 +84,13 @@ class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Note
-        fields = ["url", "id", "title", "content", "owner", "tags"]
+        fields = [
+            "url",
+            "id",
+            "created_at",
+            "updated_at",
+            "title",
+            "content",
+            "owner",
+            "tags",
+        ]
