@@ -1,6 +1,9 @@
 {
   "name": "django-chatbot-playground",
   "type": "module",
+  "workspaces": [
+    "stacks/*"
+  ],
   "devDependencies": {
     "@types/bun": "latest"
   },

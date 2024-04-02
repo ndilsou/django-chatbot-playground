@@ -34,7 +34,7 @@ uvicorn = "^0.29.0"
 gunicorn = "^21.2.0"
 aws-lambda-powertools = "^2.36.0"
 momento = "^1.20.1"
-django-ses = {extras = ["events"], version = "^3.5.2"}
+django-ses = { extras = ["events"], version = "^3.5.2" }
 
 
 [tool.poetry.group.dev.dependencies]
@@ -49,6 +49,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poe.tasks]
 dev = "python manage.py runserver"
 makemigrations = "python manage.py makemigrations"
+manage = "python manage.py"
 migrate = "python manage.py migrate"
 flightcheck = "python manage.py check --deploy"
 run = "python -m gunicorn chat.asgi:application -k uvicorn.workers.UvicornWorker"

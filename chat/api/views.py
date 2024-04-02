@@ -1,8 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
 from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
@@ -17,6 +18,12 @@ from . import permissions
 
 
 logger = structlog.get_logger(__name__)
+
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+async def health_check(request):
+    return Response({"status": "ok"})
 
 
 class UserViewSet(viewsets.ModelViewSet):

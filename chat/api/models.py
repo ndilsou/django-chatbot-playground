@@ -61,14 +61,7 @@ class Conversation(cuid.BaseModel):
             )
             for m in messages_q
         ]
-        # messages.append(
-        #     dict(
-        #         role=next_message.role,
-        #         content=next_message.content,
-        #         name=next_message.name,
-        #         function_call=next_message.function_call,
-        #     )
-        # )
+
         response = completion(
             model="claude-3-sonnet-20240229",
             messages=messages,

@@ -1,6 +1,8 @@
 # Use the official Python image from the Docker Hub
 FROM python:3.12 as builder
 
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+
 RUN pip install poetry
 WORKDIR /build
 COPY pyproject.toml poetry.lock ./
@@ -17,5 +19,6 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /var/task
 COPY --from=builder /var/task /var/task
 COPY ./chat ./chat
+COPY ./public ./public
 
 CMD ["python", "-m", "gunicorn", "-b", "0.0.0.0:80", "chat.asgi:application", "-k", "uvicorn.workers.UvicornWorker"]

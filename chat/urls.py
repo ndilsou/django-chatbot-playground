@@ -43,6 +43,7 @@ conversations_router.register(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("health-check/", views.health_check),
     path("api/", include(router.urls)),
     path("api/", include(conversations_router.urls)),
     path("api/auth/", include("rest_framework.urls", namespace="rest_framework")),

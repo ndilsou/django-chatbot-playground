@@ -1,4 +1,5 @@
 .venv
 .sst
 .git
+stacks
 .node_modules
